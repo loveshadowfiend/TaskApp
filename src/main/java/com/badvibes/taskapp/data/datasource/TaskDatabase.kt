@@ -1,4 +1,4 @@
-package com.badvibes.taskapp.data
+package com.badvibes.taskapp.data.datasource
 
 import android.content.Context
 import androidx.room.*

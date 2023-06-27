@@ -7,6 +7,7 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.badvibes.taskapp.databinding.FragmentNewTaskSheetBinding
 import com.badvibes.taskapp.domain.model.Task
@@ -24,22 +25,31 @@ class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
 
         if (task != null) {
             binding.taskTitle.text = "Edit Task"
+
             val editable = Editable.Factory.getInstance()
+
             binding.name.text = editable.newEditable(task!!.name)
             binding.desc.text = editable.newEditable(task!!.desc)
+
             if (task!!.dueTime() != null) {
                 dueTime = task!!.dueTime()!!
                 updateTimeButtonText()
             }
         } else {
+            binding.deleteButton.isVisible = false
             binding.taskTitle.text = "New Task"
         }
 
         taskViewModel = ViewModelProvider(activity)[TaskViewModel::class.java]
+        binding.deleteButton.setOnClickListener{
+            deleteAction()
+        }
         binding.saveButton.setOnClickListener {
             saveAction()
         }
         binding.timePickerButton.setOnClickListener{
+            if (dueTime == null)
+                dueTime = LocalTime.now()
             openTimePicker()
         }
     }
@@ -65,7 +75,6 @@ class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNewTaskSheetBinding.inflate(inflater, container, false)
-        binding.root.setBackgroundColor(Color.WHITE)
         return binding.root
     }
 
@@ -74,10 +83,10 @@ class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
         val desc = binding.desc.text.toString()
         val dueTimeString = if (dueTime == null) null else Task.timeFormatter.format(dueTime)
 
-        if (task == null) { // new task
+        if (task == null) {
             val newTask = Task(name, desc, dueTimeString, null)
             taskViewModel.addTask(newTask)
-        } else { // edit
+        } else {
             task!!.name = name
             task!!.desc = desc
             taskViewModel.updateTask(task!!)
@@ -85,6 +94,16 @@ class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
 
         binding.name.setText("")
         binding.desc.setText("")
+        dismiss()
+    }
+
+    private fun deleteAction() {
+        if (task == null) {
+            dismiss()
+            return
+        }
+
+        taskViewModel.deleteTask(task!!)
         dismiss()
     }
 }

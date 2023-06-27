@@ -1,4 +1,4 @@
-package com.badvibes.taskapp.data
+package com.badvibes.taskapp.data.datasource
 
 import androidx.room.*
 import com.badvibes.taskapp.domain.model.Task

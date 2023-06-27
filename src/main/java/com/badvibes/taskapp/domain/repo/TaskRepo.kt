@@ -1,4 +1,4 @@
-package com.badvibes.taskapp.domain
+package com.badvibes.taskapp.domain.repo
 
 import com.badvibes.taskapp.domain.model.Task
 import kotlinx.coroutines.flow.Flow

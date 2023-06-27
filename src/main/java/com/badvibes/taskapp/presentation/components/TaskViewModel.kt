@@ -1,33 +1,35 @@
 package com.badvibes.taskapp.presentation.components
 
 import androidx.lifecycle.*
-import com.badvibes.taskapp.domain.TaskRepo
+import com.badvibes.taskapp.domain.repo.TaskRepo
 import com.badvibes.taskapp.domain.model.Task
+import com.badvibes.taskapp.domain.usecases.*
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.LocalTime
-import java.util.*
 
 class TaskViewModel(private val repo: TaskRepo): ViewModel() {
-    var tasks : LiveData<List<Task>> = repo.getTasks().asLiveData()
+    // use cases
+    private val addTask = AddTask(repo)
+    private val getTasks = GetTasks(repo)
+    private val updateTask = UpdateTask(repo)
+    private val setCompleted = SetCompleted(repo)
+    private val deleteTask = DeleteTask(repo)
+
+    var tasks : LiveData<List<Task>> = getTasks.execute().asLiveData()
 
     fun addTask(newTask: Task) = viewModelScope.launch {
-        repo.insertTask(newTask)
+        addTask.execute(newTask)
     }
 
     fun updateTask(task: Task) = viewModelScope.launch {
-        repo.updateTask(task)
+        updateTask.execute(task)
     }
 
     fun setCompleted(task: Task) = viewModelScope.launch {
-        if (!task.isCompleted()) {
-            task.completedDateString = Task.dateFormatter.format(LocalDate.now())
-        } else {
-            task.completedDateString = null
-            task.dueTimeString = null
-        }
+        setCompleted.execute(task)
+    }
 
-        repo.updateTask(task)
+    fun deleteTask(task: Task) = viewModelScope.launch {
+        deleteTask.execute(task)
     }
 }
 

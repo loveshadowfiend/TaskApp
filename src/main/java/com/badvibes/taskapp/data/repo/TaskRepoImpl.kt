@@ -1,6 +1,7 @@
-package com.badvibes.taskapp.data
+package com.badvibes.taskapp.data.repo
 
-import com.badvibes.taskapp.domain.TaskRepo
+import com.badvibes.taskapp.data.datasource.TaskDao
+import com.badvibes.taskapp.domain.repo.TaskRepo
 import com.badvibes.taskapp.domain.model.Task
 import kotlinx.coroutines.flow.Flow
 
