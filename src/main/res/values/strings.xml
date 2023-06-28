@@ -11,4 +11,6 @@
     <string name="save">Save</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
+    <string name="editTask">Edit Task</string>
+    <string name="newTask">New Task</string>
 </resources>

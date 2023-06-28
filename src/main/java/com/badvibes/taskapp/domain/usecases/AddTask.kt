@@ -2,9 +2,7 @@ package com.badvibes.taskapp.domain.usecases
 
 import com.badvibes.taskapp.databinding.FragmentNewTaskSheetBinding
 import com.badvibes.taskapp.domain.repo.TaskRepo
-import com.badvibes.taskapp.domain.model.InvalidTaskException
 import com.badvibes.taskapp.domain.model.Task
-import com.google.android.material.snackbar.Snackbar
 import java.time.LocalTime
 
 class AddTask(
@@ -12,7 +10,7 @@ class AddTask(
 ) {
     suspend fun execute(binding: FragmentNewTaskSheetBinding, dueTime: LocalTime?) {
         val name = binding.name.text.toString()
-        if (name.isBlank()) return;
+        if (name.isBlank()) return
         val desc = binding.desc.text.toString()
         val dueTimeString = if (dueTime == null) null else Task.timeFormatter.format(dueTime)
 

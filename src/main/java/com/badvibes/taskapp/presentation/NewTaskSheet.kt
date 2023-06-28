@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.badvibes.taskapp.R
 import com.badvibes.taskapp.databinding.FragmentNewTaskSheetBinding
 import com.badvibes.taskapp.domain.model.Task
 import com.badvibes.taskapp.presentation.components.TaskViewModel
@@ -36,7 +36,7 @@ class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
         val activity = requireActivity()
 
         if (task != null) {
-            binding.taskTitle.text = "Edit Task"
+            binding.taskTitle.text = getString(R.string.editTask)
 
             val editable = Editable.Factory.getInstance()
 
@@ -49,7 +49,7 @@ class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
             }
         } else {
             binding.deleteButton.isVisible = false
-            binding.taskTitle.text = "New Task"
+            binding.taskTitle.text = getString(R.string.newTask)
         }
 
         taskViewModel = ViewModelProvider(activity)[TaskViewModel::class.java]
