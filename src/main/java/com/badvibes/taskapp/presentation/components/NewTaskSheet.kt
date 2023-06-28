@@ -1,20 +1,20 @@
 package com.badvibes.taskapp.presentation.components
 
 import android.app.TimePickerDialog
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.badvibes.taskapp.databinding.FragmentNewTaskSheetBinding
 import com.badvibes.taskapp.domain.model.Task
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalTime
 
-class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
+class NewTaskSheet(var task: Task?) : DialogFragment() {
     private lateinit var binding: FragmentNewTaskSheetBinding
     private lateinit var taskViewModel: TaskViewModel
     private var dueTime: LocalTime? = null
@@ -54,9 +54,14 @@ class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
         }
     }
 
+    // TODO: not to use this
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
+
     private fun openTimePicker() {
-//        if (dueTime == null)
-//            dueTime = LocalTime.now()
         val listener = TimePickerDialog.OnTimeSetListener{_, selectedHour, selectedMinute ->
             dueTime = LocalTime.of(selectedHour, selectedMinute)
             updateTimeButtonText()
