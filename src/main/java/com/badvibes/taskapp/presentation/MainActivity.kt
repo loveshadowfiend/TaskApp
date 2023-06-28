@@ -3,10 +3,7 @@ package com.badvibes.taskapp.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.badvibes.taskapp.TaskApp
 import com.badvibes.taskapp.databinding.ActivityMainBinding
 import com.badvibes.taskapp.domain.model.Task
