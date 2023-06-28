@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Paint
 import androidx.recyclerview.widget.RecyclerView
 import com.badvibes.taskapp.databinding.TaskCellBinding
-import com.badvibes.taskapp.domain.model.Task
+import com.badvibes.taskapp.data.model.Task
 import java.time.format.DateTimeFormatter
 
 class TaskViewHolder(

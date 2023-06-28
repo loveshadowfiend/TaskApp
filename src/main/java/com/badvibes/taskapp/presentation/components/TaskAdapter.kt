@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.badvibes.taskapp.databinding.TaskCellBinding
-import com.badvibes.taskapp.domain.model.Task
+import com.badvibes.taskapp.data.model.Task
 
 class TaskAdapter(
     private val tasks: List<Task>,

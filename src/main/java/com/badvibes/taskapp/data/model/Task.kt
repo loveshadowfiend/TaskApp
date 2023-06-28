@@ -1,4 +1,4 @@
-package com.badvibes.taskapp.domain.model
+package com.badvibes.taskapp.data.model
 
 import android.content.Context
 import androidx.core.content.ContextCompat

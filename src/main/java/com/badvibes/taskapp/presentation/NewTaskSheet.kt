@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.badvibes.taskapp.R
+import com.badvibes.taskapp.TaskApp
 import com.badvibes.taskapp.databinding.FragmentNewTaskSheetBinding
-import com.badvibes.taskapp.domain.model.Task
+import com.badvibes.taskapp.data.model.Task
+import com.badvibes.taskapp.presentation.components.TaskModelFactory
 import com.badvibes.taskapp.presentation.components.TaskViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -20,7 +23,9 @@ import java.time.LocalTime
 
 class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentNewTaskSheetBinding
-    private lateinit var taskViewModel: TaskViewModel
+    private val taskViewModel: TaskViewModel by viewModels {
+        TaskModelFactory((requireActivity().application as TaskApp).repo)
+    }
     private var dueTime: LocalTime? = null
 
     override fun onCreateView(
@@ -52,7 +57,7 @@ class NewTaskSheet(var task: Task?) : BottomSheetDialogFragment() {
             binding.taskTitle.text = getString(R.string.newTask)
         }
 
-        taskViewModel = ViewModelProvider(activity)[TaskViewModel::class.java]
+//        taskViewModel = ViewModelProvider(activity)[TaskViewModel::class.java]
         binding.deleteButton.setOnClickListener{
             taskViewModel.deleteTask(task!!)
             dismiss()

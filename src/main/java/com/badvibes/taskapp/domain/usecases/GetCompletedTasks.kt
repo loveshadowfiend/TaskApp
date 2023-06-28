@@ -2,11 +2,12 @@ package com.badvibes.taskapp.domain.usecases
 
 import com.badvibes.taskapp.domain.repo.TaskRepo
 import com.badvibes.taskapp.data.model.Task
+import kotlinx.coroutines.flow.Flow
 
-class DeleteTask(
+class GetCompletedTasks(
     private val repo: TaskRepo
 ) {
-    suspend fun execute(task: Task) {
-        repo.deleteTask(task)
+    fun execute() : Flow<List<Task>> {
+        return repo.getCompletedTasks()
     }
 }

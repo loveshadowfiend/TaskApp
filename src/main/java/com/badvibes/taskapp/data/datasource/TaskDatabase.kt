@@ -2,7 +2,7 @@ package com.badvibes.taskapp.data.datasource
 
 import android.content.Context
 import androidx.room.*
-import com.badvibes.taskapp.domain.model.Task
+import com.badvibes.taskapp.data.model.Task
 
 @Database(entities = [Task::class], version = 2, exportSchema = false)
 public abstract class TaskDatabase: RoomDatabase() {

@@ -1,7 +1,7 @@
 package com.badvibes.taskapp.domain.usecases
 
 import com.badvibes.taskapp.domain.repo.TaskRepo
-import com.badvibes.taskapp.domain.model.Task
+import com.badvibes.taskapp.data.model.Task
 import kotlinx.coroutines.flow.Flow
 
 class GetTasks(

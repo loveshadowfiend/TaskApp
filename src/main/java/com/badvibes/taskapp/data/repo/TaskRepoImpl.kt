@@ -2,7 +2,7 @@ package com.badvibes.taskapp.data.repo
 
 import com.badvibes.taskapp.data.datasource.TaskDao
 import com.badvibes.taskapp.domain.repo.TaskRepo
-import com.badvibes.taskapp.domain.model.Task
+import com.badvibes.taskapp.data.model.Task
 import kotlinx.coroutines.flow.Flow
 
 class TaskRepoImpl(
@@ -12,8 +12,12 @@ class TaskRepoImpl(
         return dao.getTasks()
     }
 
-    override suspend fun getTaskById(id: Int) {
-       dao.getTaskById(id)
+    override fun getUncompletedTasks() : Flow<List<Task>> {
+       return dao.getUncompletedTasks()
+    }
+
+    override fun getCompletedTasks() : Flow<List<Task>> {
+        return dao.getCompletedTasks()
     }
 
     override suspend fun insertTask(task: Task) {
