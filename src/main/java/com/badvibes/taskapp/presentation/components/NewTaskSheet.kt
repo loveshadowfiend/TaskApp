@@ -11,7 +11,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.badvibes.taskapp.databinding.FragmentNewTaskSheetBinding
 import com.badvibes.taskapp.domain.model.Task
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalTime
 
 class NewTaskSheet(var task: Task?) : DialogFragment() {
@@ -54,13 +53,6 @@ class NewTaskSheet(var task: Task?) : DialogFragment() {
         }
     }
 
-    // TODO: not to use this
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        retainInstance = true
-    }
-
-
     private fun openTimePicker() {
         val listener = TimePickerDialog.OnTimeSetListener{_, selectedHour, selectedMinute ->
             dueTime = LocalTime.of(selectedHour, selectedMinute)
@@ -78,7 +70,7 @@ class NewTaskSheet(var task: Task?) : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentNewTaskSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
